@@ -1,4 +1,4 @@
-# Hack The Box — Spectra 🛰️
+# Hack The Box — Spectra 
 
 **Difficulty:** Easy  
 **OS:** Linux (ChromeOS/Ubuntu)  
@@ -8,7 +8,7 @@
 
 ---
 
-## 🧠 Overview
+## Overview
 
 This repository contains the full exploitation steps and methodology for the *Spectra* machine from Hack The Box.
 
@@ -21,7 +21,7 @@ Spectra is a beginner-friendly Linux machine that simulates real-world misconfig
 
 ---
 
-## 🔍 Enumeration
+## Enumeration
 
 ### Port Scanning (Nmap)
 ```bash
