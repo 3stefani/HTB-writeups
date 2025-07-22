@@ -1,10 +1,10 @@
-# Hack The Box Writeups 🧠💻
+# Hack The Box Writeups 
 
 This repository contains personal writeups of Hack The Box machines for educational purposes only. Each writeup includes enumeration steps, exploitation techniques, privilege escalation, and key learnings.
 
 ---
 
-## Index 📌
+## Index 
 
 | Machine Name  | Difficulty | OS     | Writeup Link                      |
 |---------------|------------|--------|----------------------------------|
@@ -21,7 +21,7 @@ Never attempt to exploit systems without proper authorization.
 
 ---
 
-## 📫 Contact
+## Contact
 
 - GitHub: [3stefani](https://github.com/3stefani))
 - HTB Profile: [3stefani](https://app.hackthebox.com/profile/overview))
