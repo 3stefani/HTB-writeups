@@ -1,0 +1,30 @@
+# Hack The Box — Spectra 🛰️
+
+**Difficulty:** Easy  
+**OS:** Linux (ChromeOS/Ubuntu)  
+**IP:** 10.10.10.229  
+**Author:** Hack The Box  
+**Category:** CTF / Pentesting  
+
+---
+
+## 🧠 Overview
+
+This repository contains the full exploitation steps and methodology for the *Spectra* machine from Hack The Box.
+
+Spectra is a beginner-friendly Linux machine that simulates real-world misconfigurations in web servers and system services. The exploitation path involves:
+
+- Directory listing exposure
+- WordPress configuration file leak
+- Gaining access via exposed credentials
+- Privilege escalation through Upstart's `initctl` misconfiguration
+
+---
+
+## 🔍 Enumeration
+
+### Port Scanning (Nmap)
+```bash
+22/tcp   SSH
+80/tcp   HTTP
+3306/tcp MySQL
