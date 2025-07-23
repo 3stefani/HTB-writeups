@@ -136,7 +136,7 @@ exploit
 
 ---
 
-## redential Discovery
+## Credential Discovery
 
 Located `/opt/autologin.conf.orig`, which referenced:
 ```
