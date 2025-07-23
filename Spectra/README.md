@@ -1,11 +1,11 @@
-# 🛰️ Spectra - Hack The Box Writeup
+# ⭐Spectra - Hack The Box Writeup⭐
 
 ![HTB](https://img.shields.io/badge/HTB-Retired-green)
 ![Difficulty](https://img.shields.io/badge/Difficulty-Easy-brightgreen)
 ![OS](https://img.shields.io/badge/OS-Linux-blue)
 ![Category](https://img.shields.io/badge/Category-CTF-red)
 
-## 📋 Machine Info
+## Machine Info
 
 | Property | Value |
 |----------|-------|
