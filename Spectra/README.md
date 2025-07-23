@@ -1,4 +1,4 @@
-# ⭐Spectra - Hack The Box Writeup⭐
+# ⭐Spectra - Hack The Box Write-up⭐
 
 ![HTB](https://img.shields.io/badge/HTB-Retired-green)
 ![Difficulty](https://img.shields.io/badge/Difficulty-Easy-brightgreen)
