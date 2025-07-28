@@ -89,7 +89,7 @@ The **Job Manager** WordPress plugin allows reading arbitrary files through pred
 I used an exploit script originally shared on [vagmour.eu](https://vagmour.eu) (accessed via the Wayback Machine). The script was written in Python 2, so I made a few modifications to make it compatible with **Python 3**. I also updated the date range in the `for` loop to match the post dates on `tenten.htb`, as they were outside the original script’s range. Additionally, I included image extensions (e.g., `.png`, `.jpg`) and `.zip` in the list of file types to increase the chance of finding interesting content.
 
 
-# exploit.py
+exploit.py
 
 import requests
 
