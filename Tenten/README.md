@@ -117,11 +117,14 @@ We give the script execution permissions:
 
 ```bash
 chmod +x exploit.py
-done
+```
 
 Then, we run it using:
 
-```python3 exploit.py
+```bash
+python3 exploit.py
+```
+
 The script will prompt for the target website URL and the name of the file to search for.
 
 We found the file name by running a Bash script that performs iterative requests using `curl`.
@@ -132,7 +135,7 @@ We found the file name by running a Bash script that performs iterative requests
 for i in $(seq 1 20); do
   echo -n "$i: ";
   curl -sL http://tenten.htb/index.php/jobs/apply/$i/ | grep '<title>';
-done
+```
 
 File Found
 File name: HackerAccessGranted.jpg
