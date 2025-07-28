@@ -117,6 +117,7 @@ We give the script execution permissions:
 
 ```bash
 chmod +x exploit.py
+done
 
 Then, we run it using:
 
