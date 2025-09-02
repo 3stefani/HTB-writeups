@@ -33,7 +33,7 @@ Through these machines, you'll develop expertise in:
 | Machine | Difficulty | OS | Skills | Status | Writeup |
 |---------|------------|-------|---------|---------|---------|
 | **[Tenten](./tenten/)** | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Linux](https://img.shields.io/badge/Linux-blue) | WordPress, CVE-2015-6668, Steganography, SUID | ✅ Complete | [📖 View](./tenten/README.md) |
-| **[Spectra](./spectra/)** | ![Easy](https://img.shields.io/badge/Easy-green) | ![Linux](https://img.shields.io/badge/Linux-blue) | WordPress, Password Cracking, Privilege Escalation | ✅ Complete | [📖 View](./spectra/README.md) |
+| **[Spectra](./spectra/)** | ![Easy](https://img.shields.io/badge/Easy-green) | ![Linux](https://img.shields.io/badge/Linux-blue) | WordPress, Password Cracking, Privilege Escalation | ✅ Complete | [📖 View](./Spectra/README.md) |
 
 ### 📊 Statistics
 
