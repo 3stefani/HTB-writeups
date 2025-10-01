@@ -1,4 +1,4 @@
-# ⚡ Hack The Box - Penetration Testing Writeups Collection
+# ⚡ Hack The Box - Penetration Testing Writeups Collection ⚡
 
 ![Hack The Box](https://img.shields.io/badge/Platform-Hack%20The%20Box-green)
 ![Red Team](https://img.shields.io/badge/Focus-Red%20Team-red)
