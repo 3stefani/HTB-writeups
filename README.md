@@ -5,7 +5,7 @@
 ![Pentesting](https://img.shields.io/badge/Role-Penetration%20Tester-orange)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
-## 📋 Overview
+## Overview
 
 Welcome to my collection of **Hack The Box** penetration testing writeups! This repository contains detailed exploitation walkthroughs and methodologies for various retired HTB machines, showcasing offensive cybersecurity techniques and ethical hacking skills.
 
@@ -13,7 +13,7 @@ Welcome to my collection of **Hack The Box** penetration testing writeups! This 
 
 ---
 
-## 🎯 Learning Objectives
+## Learning Objectives
 
 Through these machines, you'll develop expertise in:
 
@@ -26,16 +26,16 @@ Through these machines, you'll develop expertise in:
 
 ---
 
-## 🏆 Machines Collection
+## Machines Collection
 
-### 🔴 Retired Machines
+### Retired Machines
 
 | Machine | Difficulty | OS | Skills | Status | Writeup |
 |---------|------------|-------|---------|---------|---------|
 | **[Tenten](https://www.hackthebox.com/machines/tenten)** | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Linux](https://img.shields.io/badge/Linux-blue) | WordPress, CVE-2015-6668, Steganography, SUID | ✅ Complete | [📖 View](./Tenten/README.md) |
 | **[Spectra](https://www.hackthebox.com/machines/spectra)**  | ![Easy](https://img.shields.io/badge/Easy-green) | ![Linux](https://img.shields.io/badge/Linux-blue) | WordPress, Password Cracking, Privilege Escalation | ✅ Complete | [📖 View](./Spectra/README.md) |
 
-### 📊 Statistics
+### Statistics
 
 - **Total Machines:** 2
 - **Completed:** 2 
@@ -46,7 +46,7 @@ Through these machines, you'll develop expertise in:
 
 ---
 
-## 🛠️ Tools & Techniques Arsenal
+## Tools & Techniques Arsenal
 
 ### Reconnaissance & Enumeration
 | Category | Tools Used |
@@ -75,7 +75,7 @@ Through these machines, you'll develop expertise in:
 
 ## 🎓 Machine Descriptions
 
-### 🎯 Tenten - WordPress Plugin Vulnerability Chain
+### Tenten - WordPress Plugin Vulnerability Chain
 **Difficulty:** Medium | **OS:** Linux (Ubuntu)
 
 **Attack Vector Summary:**
@@ -92,7 +92,7 @@ WordPress Job Manager plugin vulnerability (CVE-2015-6668) leading to file discl
 
 ---
 
-### 🔧 Spectra - WordPress Configuration & Credential Management
+### Spectra - WordPress Configuration & Credential Management
 **Difficulty:** Easy | **OS:** Linux (Chrome OS based)
 
 **Attack Vector Summary:**
@@ -109,7 +109,7 @@ WordPress configuration file exposure leading to database credentials, password 
 
 ---
 
-## 📈 Skill Development Progression
+## Skill Development Progression
 
 ```mermaid
 graph TD
@@ -125,7 +125,7 @@ graph TD
 
 ---
 
-## 🎯 Professional Relevance
+## Professional Relevance
 
 These machines prepare you for:
 
@@ -143,7 +143,7 @@ These machines prepare you for:
 
 ---
 
-## 🔍 Methodology Framework
+## Methodology Framework
 
 ### Phase 1: Reconnaissance
 1. **Network Discovery** - Port scanning and service enumeration
@@ -171,7 +171,7 @@ These machines prepare you for:
 
 ---
 
-## 📚 Learning Resources
+## Learning Resources
 
 ### HTB Official Resources
 - [Hack The Box Academy](https://academy.hackthebox.com/)
@@ -192,7 +192,7 @@ These machines prepare you for:
 
 ---
 
-## 📋 Usage Guidelines
+## Usage Guidelines
 
 ### For Practitioners
 1. **Follow responsible disclosure** - Only test authorized systems
@@ -209,7 +209,7 @@ These machines prepare you for:
 
 ---
 
-## 🏅 Achievements & Certifications
+## Achievements & Certifications
 
 ### HTB Profile Highlights
 - **Machines Owned:** 2/2 (100% Success Rate)
@@ -226,7 +226,7 @@ These skills directly support preparation for:
 
 ---
 
-## 🔗 Connect & Collaborate
+## Connect & Collaborate
 
 ### Professional Networks
 - **LinkedIn:** Connect for career discussions and industry insights
@@ -253,7 +253,7 @@ These skills directly support preparation for:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Interested in improving these writeups? You can:
 
