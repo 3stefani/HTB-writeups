@@ -273,5 +273,5 @@ Interested in improving these writeups? You can:
 
 ## Contact
 
-- GitHub: [3stefani](https://github.com/3stefani))
-- HTB Profile: [3stefani](https://app.hackthebox.com/profile/overview))
+- GitHub: [3stefani](https://github.com/3stefani)
+- HTB Profile: [3stefani](https://app.hackthebox.com/profile/overview)
