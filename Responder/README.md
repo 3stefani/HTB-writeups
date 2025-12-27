@@ -266,6 +266,23 @@ At this point, we proceed to the Password Cracking section.
 
 
 Result:
+<pre>Administrator:badminton</pre>
 
-Administrator:badminton
+## Remote Access (WinRM)
 
+To remotely access the target Windows machine, we make use of a native Windows service identified during enumeration.
+
+An Nmap scan revealed that TCP port 5985 is open, which corresponds to WinRM (Windows Remote Management).
+
+In modern Windows systems, command-line remote access is typically performed using WinRM, which can be considered the Windows equivalent of SSH on Linux systems.
+
+Then, now that we have the valid credentials, we can gain access the machine remotely.
+
+<pre>evil-winrm -i 10.129.x.x -u Administrator -p badminton</pre>
+
+- `i` → IP address of the victim machine
+- `u` → user
+- `p` → password
+
+This provides a PowerShell session with administrator privileges.
+![Evil -WinRM session](img/sesion-evil-winrm.jpg) 
