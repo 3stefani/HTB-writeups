@@ -70,10 +70,9 @@ OWASP Top 10: **A01:2021 – Broken Access Control**
 
 ## Connectivity check
 
-
 Before starting the enumeration phase, we performed a basic connectivity check using ping to verify that the target machine was reachable from our system.
 
-ping 10.129.x.x
+<pre> ping 10.129.x.x </pre> 
 
 
 The response confirmed successful communication and revealed the following:
