@@ -188,16 +188,16 @@ First, we identify our VPN network interface using the following command:
 
 
 The VPN interface used by Hack The Box is typically tun0.
-![tun0](img/tun0.jpg)
+
 
 Once identified, we start Responder on this interface:
 
 <pre>sudo responder -I tun0</pre> 
 
-
 At this point, Responder is actively listening for incoming SMB/HTTP authentication requests, waiting for a client to attempt authentication.
 
 We leave Responder running in the background.
+![Responder is listening](img/responder-listening.jpg) 
 
 We start Responder on our VPN interface:
 
