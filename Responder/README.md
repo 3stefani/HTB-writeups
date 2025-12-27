@@ -78,31 +78,66 @@ Before starting the enumeration phase, we performed a basic connectivity check u
 
 The response confirmed successful communication and revealed the following:
 
-TTL = 127
+**TTL = 127**
 
-A TTL value close to 128 typically indicates that the target system is running Windows, as Windows-based operating systems commonly use an initial TTL of 128.
+**A TTL value close to 128 typically indicates that the target system is running Windows,** as Windows-based operating systems commonly use an initial TTL of 128.
 
 This information helped us infer the target operating system early in the assessment and guided our subsequent enumeration and exploitation approach.
 
 ## Enumeration
-Web Enumeration
+
+### Enumeration – Port Scanning ###
+
+Before performing web enumeration, we ran an Nmap scan to identify open ports on the target system.
+
+<pre> nmap -Pn -p 80 10.129.51.166 </pre>
+
+**Nmap Parameters Explanation**
+
+**-Pn**
+Disables host discovery and skips the ping check. This is useful when ICMP is blocked and ensures the scan proceeds even if the host does not respond to ping.
+
+**-p 80**
+Specifies that only port 80 should be scanned.
+
+**10.129.51.166**
+The target machine IP address.
+
+**Scan Result**
+80/tcp open  http
+
+![Nmap](img/nmap.jpg)
+
+
+This result confirms that port 80 is open and that a web service (HTTP) is running on the target.
+Knowing that a web service is available allows us to focus our enumeration on web-based attack vectors.
+
+### Web Enumeration ###
 
 We begin by identifying the technologies used by the target:
 
-whatweb http://10.129.x.x
+<pre> whatweb http://10.129.x.x </pre>
 
 
-Key findings:
+**Key findings:**
 
-Apache running on Windows
+**Apache** running on Windows
 
-PHP backend
+**PHP** backend
 
-Redirect to the virtual host unika.htb
+**PHP**Redirect to the virtual host unika.htb**PHP**
+![WhatWeb](img/whatweb.jpg)
 
-We add the domain to /etc/hosts:
+Since the application redirects to `unika.htb`, we need to resolve the domain locally. We open the file hosts
 
-10.129.x.x unika.htb
+<pre> sudo nano /etc/hosts </pre>
 
+Then, we add the domain to /etc/hosts
+
+<pre>10.129.x.x unika.htb</pre>
+
+Now, we can type unika.htb into the browser and have access to the website
+
+![unika](img/unika-tras-resolver.dns.jpg)
 
 Accessing http://unika.htb reveals a PHP-based website with dynamic page loading.
