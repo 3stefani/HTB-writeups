@@ -30,17 +30,41 @@ Hash capture and cracking
 Windows Remote Management (WinRM)
 
 ### Key Steps:
-Identifying a Local File Inclusion (LFI) vulnerability via a dynamic page parameter
+**Exploiting Local File Inclusion (LFI)** via unsanitized page parameter
 
-Escalating LFI to Remote File Inclusion (RFI) using UNC paths on a Windows host
+MITRE ATT&CK: T1005 – Data from Local System
 
-Capturing NTLMv2 hashes by forcing authentication to a malicious SMB server (Responder)
+OWASP Top 10: A03:2021 – Injection
 
-Cracking the captured hash using John the Ripper
+**Escalating LFI to Remote File Inclusion (RFI)** using UNC paths on a Windows host
 
-Gaining remote administrative access through WinRM with Evil-WinRM
+MITRE ATT&CK: **T1105 – Ingress Tool Transfer**
 
-Enumerating the filesystem to locate and retrieve the flag
+OWASP Top 10: **A05:2021 – Security Misconfiguration**
+
+**Capturing NTLMv2 authentication hashes** via forced SMB authentication (Responder)
+
+MITRE ATT&CK: **T1557.001 – Adversary-in-the-Middle (LLMNR/NBT-NS Poisoning)**
+
+OWASP Top 10: **A02:2021 – Cryptographic Failures**
+
+**Cracking captured NTLMv2 hashes** to recover valid credentials
+
+MITRE ATT&CK: **T1110 – Brute Force**
+
+OWASP Top 10: **A07:2021 – Identification and Authentication Failures**
+
+**Remote access via WinRM (Evil-WinRM)** using compromised administrator credentials
+
+MITRE ATT&CK: **T1021.006 – Remote Services: WinRM**
+
+OWASP Top 10: **A07:2021 – Identification and Authentication Failures**
+
+**Post-exploitation enumeration** to locate and retrieve the flag
+
+MITRE ATT&CK: **T1083 – File and Directory Discovery**
+
+OWASP Top 10: **A01:2021 – Broken Access Control**
 
 ---
 
