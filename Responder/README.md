@@ -296,8 +296,64 @@ Note that we've gained access as an Administrator user; after exploring we find 
 ![Obtaining the flag](img/flag.jpg) 
 
 
-
-
-
 ✅ Flag successfully retrieved
+
+![Machine Responder Pwned](img/responder-pwned.jpg) 
+
+## Conclusion
+
+This machine demonstrates how a simple LFI vulnerability can escalate into full system compromise when combined with:
+
+NTLM authentication abuse
+
+Weak credentials
+
+Exposed Windows services
+
+## Key Lessons
+
+Never include files dynamically without validation
+
+Avoid NTLM where possible
+
+Use strong passwords
+
+Apply secure coding practices (allowlists, sanitization)
+
+## Key Takeaways
+
+Improper file inclusion handling can lead to LFI/RFI vulnerabilities
+
+Windows systems may automatically authenticate using NTLM, which can be abused
+
+Responder is a powerful tool for capturing NTLM authentication hashes
+
+Captured NetNTLMv2 hashes can often be cracked if weak passwords are used
+
+WinRM provides full remote command execution once valid credentials are obtained
+
+
+## Tools Used
+
+| Category | Tools |
+|----------|-------|
+| **Reconnaissance** | ping, nmap, whatweb, Browser |
+|**Enumeration** | nmap, Manual Web Enumeration |
+| **Exploitation** | Responder, Local/Remote File Inclusion (LFI/RFI)|
+| **Credential Access** | Responder, John the Ripper|
+| **Remote Access** | Evil-WinRM|
+| **Post-Exploitation** | PowerShell (dir, type, filesystem enumeration) |
+
+## ⚠️ Disclaimer
+
+This writeup is for educational purposes only.
+
+The techniques described here were performed in a controlled laboratory environment provided by Hack The Box.
+
+Do not attempt to use these methods on systems you do not own or have explicit permission to test.
+
+This writeup complies with the Hack The Box Terms of Service and documents only Starting Point / retired content.
+
+
+
 
