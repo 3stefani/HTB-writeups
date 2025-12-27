@@ -156,6 +156,8 @@ If you look at the URL, you'll see something like::
 
 ![Parameter Page](img/parametro-page.jpg)
 
+This indicates that the backend does something similar to:
+<pre> include($_GET['page']); </pre>
 This behavior indicates a file inclusion vulnerability.
 
 **Local File Inclusion (LFI)**
