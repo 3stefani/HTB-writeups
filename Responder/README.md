@@ -74,6 +74,7 @@ Before starting the enumeration phase, we performed a basic connectivity check u
 
 <pre> ping 10.129.x.x </pre> 
 
+![Ping](img/ping.jpg)
 
 The response confirmed successful communication and revealed the following:
 
