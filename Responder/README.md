@@ -230,18 +230,42 @@ If the attack is successful, Responder will display output similar to the follow
 
 ![Responder captured hash](img/responder-hash-capturado.jpg)  responder-hash-capturado
 
-From this, we obtain:
+**From this, we obtain:**
 
-Username: Administrator
+**Username: Administrator**
 
-Authentication type: NetNTLMv2
+**Authentication type: NetNTLMv2**
 
-Credential format: Hashed (not plaintext)
+**Credential format: Hashed (not plaintext)**
+
 
 This confirms that:
 
-The Windows server attempted to authenticate
+- The Windows server attempted to authenticate
 
-We successfully captured an NTLM authentication hash
+- We successfully captured an NTLM authentication hash
 
-The compromised account is Administrator
+- The compromised account is Administrator
+
+**Step 4: Saving the Hash for Cracking**
+
+Finally, we save the captured NetNTLMv2 hash to a file.
+This hash will be used in the next phase to recover the plaintext password using John the Ripper.
+
+Copy the hash, open a txt document, paste it and save it.
+
+<pre>nano hash.txt</pre>
+
+## Password Cracking
+
+At this point, we proceed to the Password Cracking section. 
+
+<pre> john -w=/usr/share/wordlists/rockyou.txt hash.txt </pre>
+
+![John the Ripper result](img/john-result.jpg) 
+
+
+Result:
+
+Administrator:badminton
+
