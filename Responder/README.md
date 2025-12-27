@@ -138,6 +138,6 @@ Then, we add the domain to /etc/hosts
 
 Now, we can type unika.htb into the browser and have access to the website
 
-![unika](img/unika-tras-resolver.dns.jpg)
+![unika](img/unika-tras-resolver-dns.jpg)
 
 Accessing http://unika.htb reveals a PHP-based website with dynamic page loading.
