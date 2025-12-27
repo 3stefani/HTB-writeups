@@ -11,7 +11,7 @@
 |----------|-------|
 | **Difficulty** | Easy |
 | **OS** | Linux (ChromeOS/Ubuntu) |
-| **IP** | 10.10.10.229 |
+| **IP** | 10.10.x.x |
 | **Category** | CTF / Retired Machine |
 | **Tags** | WordPress, Misconfigurations, Privilege Escalation, Upstart |
 
