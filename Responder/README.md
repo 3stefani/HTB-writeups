@@ -68,4 +68,41 @@ OWASP Top 10: **A01:2021 – Broken Access Control**
 
 ---
 
+## Connectivity check
+
+
+Before starting the enumeration phase, we performed a basic connectivity check using ping to verify that the target machine was reachable from our system.
+
+ping 10.129.x.x
+
+
+The response confirmed successful communication and revealed the following:
+
+TTL = 127
+
+A TTL value close to 128 typically indicates that the target system is running Windows, as Windows-based operating systems commonly use an initial TTL of 128.
+
+This information helped us infer the target operating system early in the assessment and guided our subsequent enumeration and exploitation approach.
+
 ## Enumeration
+Web Enumeration
+
+We begin by identifying the technologies used by the target:
+
+whatweb http://10.129.x.x
+
+
+Key findings:
+
+Apache running on Windows
+
+PHP backend
+
+Redirect to the virtual host unika.htb
+
+We add the domain to /etc/hosts:
+
+10.129.x.x unika.htb
+
+
+Accessing http://unika.htb reveals a PHP-based website with dynamic page loading.
