@@ -15,4 +15,33 @@
 | **Category**   | Starting Point                                  |
 | **Tags**       | LFI, RFI, NTLM, Responder, Hash Cracking, WinRM |
 
+## Overview
 
+In this lab, we exploit a Local File Inclusion (LFI) vulnerability to trigger an NTLM authentication request from a Windows server. Using Responder, we capture the NTLMv2 hash of the Administrator account, crack it with John the Ripper, and gain remote access via WinRM to retrieve the flag.
+
+This machine belongs to Hack The Box – Starting Point (Tier 0) and introduces fundamental concepts such as:
+
+Local & Remote File Inclusion (LFI / RFI)
+
+NTLM authentication
+
+Hash capture and cracking
+
+Windows Remote Management (WinRM)
+
+### Key Steps:
+Identifying a Local File Inclusion (LFI) vulnerability via a dynamic page parameter
+
+Escalating LFI to Remote File Inclusion (RFI) using UNC paths on a Windows host
+
+Capturing NTLMv2 hashes by forcing authentication to a malicious SMB server (Responder)
+
+Cracking the captured hash using John the Ripper
+
+Gaining remote administrative access through WinRM with Evil-WinRM
+
+Enumerating the filesystem to locate and retrieve the flag
+
+---
+
+## Enumeration
