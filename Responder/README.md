@@ -286,3 +286,18 @@ Then, now that we have the valid credentials, we can gain access the machine rem
 
 This provides a PowerShell session with administrator privileges.
 ![Evil -WinRM session](img/sesion-evil-winrm.jpg) 
+
+
+## Post-Exploitation & Flag
+
+Now that we gain access, we'll look for the directory containing the flag.txt file.
+Note that we've gained access as an Administrator user; after exploring we find out that the file is located under the user "mike".
+
+![Obtaining the flag](img/flag.jpg) 
+
+
+
+
+
+✅ Flag successfully retrieved
+
