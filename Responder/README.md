@@ -125,7 +125,8 @@ We begin by identifying the technologies used by the target:
 
 **PHP** backend
 
-**PHP** Redirect to the virtual host unika.htb **PHP**
+**Redirect to the virtual host unika.htb**
+
 ![WhatWeb](img/whatweb.jpg)
 
 Since the application redirects to `unika.htb`, we need to resolve the domain locally. We open the file hosts
