@@ -256,8 +256,12 @@ With this last command we obtain our flag
 
 ![Reading the flag](img/reading-flag.jpg)
 
+**NOTE: Some writeups use a Netcat reverse shell at this stage.  
+In this case, direct command execution via the web shell was enough, so a reverse shell was not necessary.**
 
 ✅ Flag successfully retrieved
+
+![Flag retrieved](img/flag.jpg)
 
 ## Conclusion
 
@@ -290,12 +294,15 @@ RCE does not always require credentials
 Cloud misconfigurations are a common real-world attack vector
 
 ## Tools Used
-Category	Tools
-Reconnaissance	ping, nmap, browser
-Enumeration	nmap, Gobuster
-Cloud Interaction	awscli
-Exploitation	PHP Web Shell, S3 File Upload
-Post-Exploitation	Linux commands (ls, cat)
+| Category | Tools |
+|----------|-------|
+| **Reconnaissance** | ping, nmap, browser |
+|**Enumeration** | nmap, Manual Web Enumeration, Gobuster |
+|**Cloud Interaction** | awscli |
+| **Exploitation** | PHP Web Shell, S3 File Upload|
+| **Post-Exploitation** | Linux commands (ls, cat) |
+
+
 ## ⚠️ Disclaimer
 
 This writeup is for educational purposes only.
