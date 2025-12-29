@@ -100,5 +100,25 @@ Furthermore, we observe that ttl = 63
 
 ### Port Scanning
 
-```bash
-nmap -sS 10.129.x.x
+<pre>sudo nmap -sS 10.129.x.x</pre>
+
+
+![Ping](img/nmap.jpg)
+
+As we can see, there are two open TCP ports. Port 80 indicates that we can connect using a browser to see if there is a website running on this port.
+
+## Adding the hostname
+From the previous scan, we know that we can connect to the server with our browser. When we visit http://10.129.X.X, a web page appears:
+![Webpage](img/webpage.jpg)
+
+Then, navigating to the “Contact” page, we see an email address with the domain “thetoppers.htb”:
+![Domain](img/domain.jpg)
+Since no DNS server is provided, we manually resolved the domain:
+<pre>sudo nano /etc/hosts</pre>
+
+Added:
+
+<pre>10.129.x.x thetoppers.htb</pre>
+
+
+
