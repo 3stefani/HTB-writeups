@@ -120,5 +120,26 @@ Added:
 
 <pre>10.129.x.x thetoppers.htb</pre>
 
+## Subdomain Enumeration
+Using Gobuster, we enumerated virtual hosts:
+<pre>gobuster vhost -w /home/kali/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u http://thetoppers.htb --append-domain</pre>
+
+**Note:** My dictionary is located in a different path than usual. It's typically located in /usr/share/wordlists/, resulting in the following command: gobuster vhost -w /home/kali/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u [http://thetoppers.htb](http://thetoppers.htb/) --append-domain
+
+![Gobuster](img/gobuster.jpg)
+
+**Discovered subdomain:**
+
+<pre>s3.thetoppers.htb</pre>
+
+
+After adding it to /etc/hosts, we accessed:
+
+<pre>http://s3.thetoppers.htb</pre>
+
+
+This revealed an Amazon S3-compatible service.
+
+
 
 
