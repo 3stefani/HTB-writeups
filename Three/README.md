@@ -140,6 +140,20 @@ After adding it to /etc/hosts, we accessed:
 
 This revealed an Amazon S3-compatible service.
 
+**About AWS S3:** S3 buckets are used for cloud storage. Interaction: Via awscli (apt install awscli)
+
+## Exploitation – AWS S3 Misconfiguration
+
+Installing and Configuring AWS CLI
+
+<pre>sudo apt install awscli</pre>
+
+After the installation, We run `aws configure` and provide any value for the configuration; in my case, I filled in all the required fields with `test`.
+
+<pre> aws configure</pre>
+
+![AWS Configuration](img/aws-configure.jpg)
 
 
+Dummy credentials were accepted, indicating no authentication enforcement.
 
