@@ -35,6 +35,7 @@ Through these machines, you'll develop expertise in:
 | **[Tenten](https://www.hackthebox.com/machines/tenten)** | ![Medium](https://img.shields.io/badge/Medium-orange) | ![Linux](https://img.shields.io/badge/Linux-blue) | WordPress, CVE-2015-6668, Steganography, SUID | ✅ Complete | [📖 View](./Tenten/README.md) |
 | **[Spectra](https://www.hackthebox.com/machines/spectra)**  | ![Easy](https://img.shields.io/badge/Easy-green) | ![Linux](https://img.shields.io/badge/Linux-blue) | WordPress, Password Cracking, Privilege Escalation | ✅ Complete | [📖 View](./Spectra/README.md) |
 | **[Responder](https://www.hackthebox.com/machines/responder)** | ![Easy](https://img.shields.io/badge/Easy-green) | ![Windows](https://img.shields.io/badge/Windows-blue) | LFI, RFI, NTLM Capture, Responder, Password Cracking, WinRM | ✅ Complete | [📖 View](./Responder/README.md) |
+| **[Three](https://www.hackthebox.com/machines/three)** | ![Easy](https://img.shields.io/badge/Easy-green) |![Linux](https://img.shields.io/badge/Linux-blue)  | Subdomain Enumeration, AWS S3, Cloud Misconfiguration, RCE | ✅ Complete | [📖 View](./Three/README.md) |
 
 ### Statistics
 
