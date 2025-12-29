@@ -251,10 +251,59 @@ We move up a directory and find the flag.txt
 ![Finding the flag Listing](img/flag-found.jpg)
 
 Reading the flag:
+With this last command we obtain our flag
+<pre>http://thetoppers.htb/shell.php?cmd=cat ../flag.txt</pre>
 
-http://thetoppers.htb/shell.php?cmd=cat%20../flag.txt
+![Reading the flag](img/reading-flag.jpg)
 
 
 ✅ Flag successfully retrieved
+
+## Conclusion
+
+This machine demonstrates how a simple cloud storage misconfiguration can lead to full compromise when combined with:
+
+Exposed S3-compatible services
+
+Lack of authentication controls
+
+Direct integration between cloud storage and web root
+
+## Key Lessons
+
+Never expose cloud storage without authentication
+
+Separate application code from upload locations
+
+Disable script execution in upload directories
+
+Apply least-privilege access to cloud services
+
+## Key Takeaways
+
+Misconfigured S3 buckets can allow arbitrary file uploads
+
+Uploaded scripts may be executed by the web server
+
+RCE does not always require credentials
+
+Cloud misconfigurations are a common real-world attack vector
+
+## Tools Used
+Category	Tools
+Reconnaissance	ping, nmap, browser
+Enumeration	nmap, Gobuster
+Cloud Interaction	awscli
+Exploitation	PHP Web Shell, S3 File Upload
+Post-Exploitation	Linux commands (ls, cat)
+## ⚠️ Disclaimer
+
+This writeup is for educational purposes only.
+
+The techniques described here were performed in a controlled laboratory environment provided by Hack The Box.
+
+Do not attempt to use these methods on systems you do not own or have explicit permission to test.
+
+This writeup complies with the Hack The Box Terms of Service and documents only Starting Point / retired content.
 
 
