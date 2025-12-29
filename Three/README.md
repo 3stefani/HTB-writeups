@@ -35,6 +35,39 @@ This machine belongs to **Hack The Box – Starting Point (Tier 1)** and introdu
 
 ---
 
+## Key Steps
+Network & Service Enumeration
+
+MITRE ATT&CK: **T1046 – Network Service Discovery**
+OWASP Top 10: **A05:2021 – Security Misconfiguration**
+
+Subdomain Enumeration
+
+MITRE ATT&CK: **T1583.002 – Acquire Infrastructure: Domains**
+OWASP Top 10: **A05:2021 – Security Misconfiguration**
+
+Discovering an Exposed S3-Compatible Service
+
+MITRE ATT&CK: **T1087 – Account Discovery**
+OWASP Top 10: **A02:2021 – Cryptographic Failures**
+
+Unauthorized Access to S3 Bucket
+
+MITRE ATT&CK: **T1530 – Data from Cloud Storage Object**
+OWASP Top 10: **A05:2021 – Security Misconfiguration**
+
+Remote Code Execution via File Upload
+
+MITRE ATT&CK: **T1105 – Ingress Tool Transfer**
+OWASP Top 10: **A03:2021 – Injection**
+
+Post-Exploitation Enumeration & Flag Retrieval
+
+MITRE ATT&CK: **T1083 – File and Directory Discovery**
+OWASP Top 10: **A01:2021 – Broken Access Control**
+
+---
+
 ## Attack Flow Summary
 
 1. Network & service enumeration  
@@ -46,6 +79,22 @@ This machine belongs to **Hack The Box – Starting Point (Tier 1)** and introdu
 7. Flag retrieval  
 
 ---
+## Connectivity Check
+
+Before enumeration, we verified connectivity to the target machine:
+
+<pre>ping 10.129.x.x</pre>
+
+
+The host responded successfully, confirming network reachability.
+Furthermore, we observe that ttl = 63
+
+- This value (close to 64) indicates that we are dealing with a **Linux** machine.
+
+> By default, TTL values ​​around 64 indicate that the machine is Linux, while values ​​of 128 would indicate that the machine is Windows.
+
+>
+![Ping](img/ping.jpg)
 
 ## Enumeration
 
