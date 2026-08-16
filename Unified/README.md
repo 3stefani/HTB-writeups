@@ -177,7 +177,7 @@ The vulnerability affecting this version is:
 ```
 CVE-2021-44228
 ```
-![Searching for the CVE](img/4_Searching-for-the-CVE.png)
+![Searching on Google the CVE](img/4_Searching_the_CVE.png)
 
 This is the well-known Log4Shell vulnerability.
 
