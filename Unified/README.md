@@ -1,10 +1,9 @@
 # ⭐ Hack The Box - Unified ⭐
 
-![Hack The Box](https://img.shields.io/badge/Hack%20The%20Box-Unified-green?style=for-the-badge&logo=hackthebox)
-![Difficulty](https://img.shields.io/badge/Difficulty-Easy-brightgreen?style=for-the-badge)
-![OS](https://img.shields.io/badge/OS-Linux-blue?style=for-the-badge&logo=linux)
-![Category](https://img.shields.io/badge/Category-Starting%20Point-orange?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Complete-success?style=for-the-badge)
+![HTB](https://img.shields.io/badge/HTB-Unified-success)
+![Difficulty](https://img.shields.io/badge/Difficulty-Easy-brightgreen)
+![OS](https://img.shields.io/badge/OS-Linux-blue)
+![Category](https://img.shields.io/badge/Category-Log4Shell_MongoDB-red)
 
 > **Machine:** Unified  
 > **Platform:** Hack The Box  
