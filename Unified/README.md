@@ -544,7 +544,7 @@ e50bc93c75b634e4b272d2f771c33681
 Root Flag
 e50bc93c75b634e4b272d2f771c33681
 ```
-![HTB - Unified Machine Solved](img/15.- HTB-Unified-machine-solved.png)
+![HTB - Unified Machine Solved](img/15_HTB-Unified-machine-solved.png)
 
 ## Tools Used
 
