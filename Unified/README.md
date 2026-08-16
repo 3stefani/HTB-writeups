@@ -491,3 +491,158 @@ $6$qU9fm/ty6zL/VOWY$zWdNy5pw6c6yDTzzhuRetQqoUynbEKxwbbsqzdNpPJkr/Kd6XfRuGhZr78kq
 The administrator's ```x_shadow value``` can then be replaced with the generated hash using MongoDB's ```update()``` function.
 
 After updating the record, the UniFi web interface accepts the new credentials.
+
+
+# 16. Accessing the UniFi Administration Panel
+
+After modifying the administrator credentials, I returned to the UniFi login page:
+```
+https://10.129.96.149:8443
+```
+I was able to authenticate using the new administrator password.
+
+Inside the UniFi administration panel, I navigated to:
+```
+Settings
+    └── Device Authentication
+```
+This section contained:
+```
+Username: root
+Password: [-]
+```
+These credentials provide the final step required to obtain root access.
+
+# 17. SSH as Root
+
+SSH is exposed on port 22.
+
+Using the credentials obtained from the UniFi administration panel:
+```
+ssh root@10.129.96.149
+```
+After authentication:
+```
+whoami
+```
+returns:
+```
+root
+```
+We now have full administrative access to the machine.
+
+# 18. Root Flag
+
+The root user's home directory contains:
+```
+root.txt
+```
+Reading it:
+```
+cat /root/root.txt
+e50bc93c75b634e4b272d2f771c33681
+Root Flag
+e50bc93c75b634e4b272d2f771c33681
+```
+## Tools Used
+
+| Category | Tools |
+|----------|-------|
+| **Reconnaissance** | ping, Nmap, cURL, Browser |
+| **Enumeration** | Nmap, ps, MongoDB Shell, Manual Web Enumeration |
+| **Vulnerability Research** | CVE Research, Searchsploit |
+| **Exploitation** | Log4jUnifi, RogueJNDI, JNDI/LDAP |
+| **Traffic Interception** | Burp Suite |
+| **Remote Access** | Netcat, SSH |
+| **Database Access** | MongoDB Shell |
+| **Credential Access** | MongoDB `x_shadow`, UniFi Device Authentication |
+| **Privilege Escalation** | MongoDB `update()`, UniFi Administration Panel |
+| **Post-Exploitation** | Linux Shell, MongoDB Enumeration |
+
+##  Vulnerabilities & Techniques
+
+| Category | Technique |
+|----------|-----------|
+| **Remote Code Execution** | Log4Shell — CVE-2021-44228 |
+| **JNDI Injection** | JNDI / LDAP Injection |
+| **Public-Facing Application** | MITRE ATT&CK T1190 |
+| **Vulnerable Components** | OWASP A06:2021 |
+| **Database Manipulation** | MongoDB `update()` |
+| **Credential Manipulation** | Modification of UniFi administrator password hash |
+| **Privilege Escalation** | UniFi Device Authentication credentials |
+| **Remote Access** | SSH as `root` |
+
+## Final Attack Path
+```
+Nmap
+ │
+ ├── 22/tcp   SSH
+ ├── 6789/tcp
+ ├── 8080/tcp
+ ├── 8443/tcp ──────────────┐
+ ├── 8843/tcp               │
+ └── 8880/tcp               │
+                            ▼
+                    UniFi Network 6.4.54
+                            │
+                            ▼
+                     CVE-2021-44228
+                        Log4Shell
+                            │
+                            ▼
+                       JNDI / LDAP
+                            │
+                            ▼
+                       RogueJNDI
+                            │
+                            ▼
+                          RCE
+                            │
+                            ▼
+                     Reverse Shell
+                            │
+                            ▼
+                      user: unifi
+                            │
+                            ▼
+                  MongoDB :27117
+                            │
+                            ▼
+                        database
+                           ace
+                            │
+                            ▼
+                  UniFi administrator
+                     credentials
+                            │
+                            ▼
+                    UniFi Web Panel
+                            │
+                            ▼
+                 Device Authentication
+                            │
+                            ▼
+                       root password
+                            │
+                            ▼
+                       SSH :22
+                            │
+                            ▼
+                         root
+                            │
+                            ▼
+                       ROOT FLAG
+```
+## Conclusion
+
+Unified was an excellent example of how multiple weaknesses and components can be chained together to achieve full system compromise.
+
+The attack started with a vulnerable public-facing UniFi application and Log4Shell, but the compromise did not end with the reverse shell. Internal enumeration revealed MongoDB, which provided access to UniFi authentication data. Modifying the administrator credentials allowed access to the management panel, where device authentication credentials ultimately provided SSH access as root.
+
+The most important lesson from this machine was not simply exploiting Log4Shell, but understanding how enumeration, vulnerability research, application internals, databases and credential reuse can be chained together into a complete attack path.
+
+## ⚠️ Disclaimer
+
+This writeup was created for educational purposes as part of a Hack The Box laboratory.
+
+All techniques and tools described here were used against an authorized CTF/laboratory environment. Do not use these techniques against systems without explicit permission.
