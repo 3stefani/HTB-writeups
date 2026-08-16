@@ -106,3 +106,59 @@ The administrator's credentials can be modified through MongoDB. After logging i
            │
            ▼
        ROOT FLAG
+```
+
+# 1. Enumeration
+
+The first step is to identify all open TCP ports.
+
+```bash
+sudo nmap -sS -p- --min-rate 5000 -Pn 10.129.96.149
+```
+
+The scan reveals:
+
+```
+PORT     STATE SERVICE
+22/tcp   open  ssh
+6789/tcp open  ibm-db2-admin
+8080/tcp open  http-proxy
+8443/tcp open  https-alt
+8843/tcp open  unknown
+8880/tcp open  cddbp-alt
+```
+
+The first four open ports are:
+
+```
+22, 6789, 8080, 8443
+```
+
+The most interesting service is port 8443, which appears to host a web application.
+
+# 2. Identifying the Application
+
+Opening the following URL in a browser:
+
+```
+https://10.129.96.149:8443
+```
+
+reveals the UniFi login interface.
+
+The exact application title can also be confirmed from the terminal:
+
+```
+curl -k -L https://10.129.96.149:8443 | grep -i "<title>"
+```
+
+The response contains:
+```
+<title>UniFi Network</title>
+```
+
+Therefore, the application is:
+
+```
+UniFi Network
+```
