@@ -416,6 +416,8 @@ MongoDB is therefore running locally on:
 ```
 27117
 ```
+![Obtaining the MongoDB port](img/5_Getting-MongDB-port.png)
+
 The important part of the process is:
 ```
 --port 27117
@@ -429,6 +431,8 @@ Connect to MongoDB:
 ```
 mongo --port 27117
 ```
+![Connecting to MongoDB](img/6_Connecting-to-MongoDB.png)
+
 The installed MongoDB version is:
 ```
 MongoDB server version: 3.6.3
@@ -445,6 +449,8 @@ admin
 config
 local
 ```
+![Listing the databases](img/7_Showing-the-Databases.png)
+
 The default database used by UniFi applications is:
 ```
 ace
@@ -460,6 +466,8 @@ The admin collection contains UniFi user information.
 ```
 db.admin.find()
 ```
+![Enumerating users in MongoDB](img/8_Enumerating-users-in-MongoDB.png)
+
 The documents contain fields such as:
 ```
 name
@@ -467,6 +475,8 @@ email
 x_shadow
 requires_new_password
 ```
+![Obtaining the user's info in MongoDB](img/9_Obtaining-the-users.png)
+
 For example:
 ```
 "name" : "administrator"
@@ -491,6 +501,8 @@ A new SHA-512 crypt hash can be generated locally with:
 ```
 mkpasswd -m sha-512 Pass123
 ```
+![Creating a hashed pass](img/10_Creating-a-hashed-pass.png)
+
 Example:
 ```
 $6$qU9fm/ty6zL/VOWY$zWdNy5pw6c6yDTzzhuRetQqoUynbEKxwbbsqzdNpPJkr/Kd6XfRuGhZr78kqJ3RSmc.o4aYSAGCEBHy/rIG.q0
@@ -508,6 +520,8 @@ https://10.129.96.149:8443
 ```
 I was able to authenticate using the new administrator password.
 
+![Login with the pass created](img/11_Login-with-the-pass-created.png)
+
 Inside the UniFi administration panel, I navigated to:
 ```
 Settings
@@ -518,6 +532,8 @@ This section contained:
 Username: root
 Password: [-]
 ```
+![Finding the pass for the root user](img/12_Finding-the-pass-for-root-user.png)
+
 These credentials provide the final step required to obtain root access.
 
 ## 17. SSH as Root
@@ -528,6 +544,8 @@ Using the credentials obtained from the UniFi administration panel:
 ```
 ssh root@10.129.96.149
 ```
+![Connecting via SSH with the pass founded](img/13_Connecting-via-SSH-with-the-pass-founded.png)
+
 After authentication:
 ```
 whoami
@@ -551,6 +569,8 @@ e50bc93c75b634e4b272d2f771c33681
 Root Flag
 e50bc93c75b634e4b272d2f771c33681
 ```
+![Getting the root's flag](img/14_Getting-the-root-flag.png)
+
 ![HTB - Unified Machine Solved](img/15_HTB-Unified-machine-solved.png)
 
 ## Tools Used
