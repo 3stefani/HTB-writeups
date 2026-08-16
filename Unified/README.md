@@ -156,9 +156,13 @@ The response contains:
 ```
 <title>UniFi Network</title>
 ```
+# 3. Identifying the Version
 
-Therefore, the application is:
+The application version can be identified from the UniFi interface:
+```
+UniFi Network 6.4.54
+```
 
-```
-UniFi Network
-```
+This is important because the version is affected by a well-known vulnerability in Apache Log4j.
+
+
