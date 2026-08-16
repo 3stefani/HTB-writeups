@@ -136,6 +136,8 @@ The first four open ports are:
 
 The most interesting service is port 8443, which appears to host a web application.
 
+![Port Discovery with NMAP](img/1_Port-Discovery.png)
+
 ## 2. Identifying the Application
 
 Opening the following URL in a browser:
@@ -145,6 +147,8 @@ https://10.129.96.149:8443
 ```
 
 reveals the UniFi login interface.
+
+![Software on port 8443](img/2_Software-on-8443.png)
 
 The exact application title can also be confirmed from the terminal:
 
@@ -156,6 +160,8 @@ The response contains:
 ```
 <title>UniFi Network</title>
 ```
+![Getting the exact title with CURL](img/3_Getting-exact-name-with-CURL.png)
+
 ## 3. Identifying the Version
 
 The application version can be identified from the UniFi interface:
@@ -171,6 +177,7 @@ The vulnerability affecting this version is:
 ```
 CVE-2021-44228
 ```
+![Searching for the CVE](img/4_Searching-for-the-CVE.png)
 
 This is the well-known Log4Shell vulnerability.
 
