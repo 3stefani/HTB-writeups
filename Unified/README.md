@@ -5,15 +5,10 @@
 ![OS](https://img.shields.io/badge/OS-Linux-blue)
 ![Category](https://img.shields.io/badge/Category-Log4Shell_MongoDB-red)
 
-> **Machine:** Unified  
-> **Platform:** Hack The Box  
-> **Difficulty:** Easy  
-> **Operating System:** Linux  
-> **IP:** `10.129.96.149`
 
 ---
 
-## 📋 Machine Information
+## Machine Information
 
 | Property | Value |
 |----------|-------|
@@ -33,7 +28,7 @@
 
 ---
 
-# 🧭 Overview
+# Overview
 
 Unified is a Linux machine based on the **UniFi Network Application**.
 
