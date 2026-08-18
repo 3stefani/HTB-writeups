@@ -397,12 +397,17 @@ parameterized queries.
 Because the application requires authentication, we use the session cookie
 <code>PHPSESSID</code>.
 </p>
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/14_found_sessio_id.png" alt="We find the session cookie in the browser's developer tools.">
+
 
 <p>
 We run:
 </p>
 
 <pre>sqlmap -u "http://10.129.x.x/dashboard.php?search=test" --cookie="PHPSESSID=&lt;SESSION_ID&gt;" --os-shell --batch</pre>
+
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/15_sqlmap.png" alt="Launching sqlmap">
+
 
 <p>
 During the tests, sqlmap identified PostgreSQL as the database management system.
@@ -440,6 +445,13 @@ We eventually obtained:
 </p>
 
 <pre>os-shell&gt;</pre>
+
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/16_findings_with_sqlmap.png" alt="Findings with sqlmap">
+
+Additionally, if we launch sqlmap with the help parameter, we also obtain information about os-shell.
+
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/17_sqlmap_os_shell.png" alt="With sqlmap, we obtain information about the os-shell.">
+
 
 <hr />
 
