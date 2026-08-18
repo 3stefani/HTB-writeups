@@ -298,6 +298,9 @@ When reviewing <code>index.php</code>, we found the authentication logic:
 
 <pre>if($_POST['username'] === 'admin' &amp;&amp; md5($_POST['password']) === "2cb42f8734ea607eefed3b70af13bbd3")</pre>
 
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/8_pass_for_admin_user.png" alt="Then we find the pass for the user admin">
+
+
 <p>
 The use of:
 </p>
@@ -314,11 +317,15 @@ We save the hash and use John the Ripper:
 
 <pre>john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt admin_hash.txt</pre>
 
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/9_creation_of_the_file.png" alt="We create the file for saving the hash">
+
 <p>
-We recovered the password:
+We use John the Ripper to perform a dictionary attack against the MD5 hash, recovering the original plain text password:
 </p>
 
 <pre>qwerty789</pre>
+
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/10_getting_the_pass_with_john.png" alt="We get the pass with John">
 
 <p>
 Credentials:
@@ -333,6 +340,7 @@ Credentials:
 <p>
 We use the recovered credentials to log into the web application.
 </p>
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/11_accesing_the_web_app.png" alt="We access the web application using the username and password we have obtained.">
 
 <p>
 Once authenticated, we find a search field:
@@ -355,12 +363,16 @@ We test a single quote:
 </p>
 
 <pre>http://10.129.x.x/dashboard.php?search=%27</pre>
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/12_parameter_on_url.png" alt="We found the `search` parameter in the URL and tested it with a single quote.">
+
 
 <p>
 The server responds with a PostgreSQL error:
 </p>
 
 <pre>ERROR: unterminated quoted string at or near "'"</pre>
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/13_error_message_after_sql.png" alt="Error message after entering a single quote">
+
 
 <p>
 This behavior indicates that the supplied value is being incorporated directly into an SQL query.
