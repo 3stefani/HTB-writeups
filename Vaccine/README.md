@@ -235,6 +235,8 @@ We download the file:
 The file is password-protected.
 </p>
 
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/3_download_ftp_file.png" alt="Then we find and download the file to our local system">
+
 <hr />
 
 <h2>ZIP File Cracking</h2>
@@ -247,6 +249,8 @@ information from a ZIP archive and converts it into a format that John can use f
 </p>
 
 <pre>zip2john backup.zip &gt; hash.txt</pre>
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/4_generating_the_hash.png" alt="Generating the hash">
+
 
 <p>
 We then use the <code>rockyou.txt</code> wordlist:
