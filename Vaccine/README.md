@@ -672,7 +672,7 @@ Finally, we read:
 
 <img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/27_get_root_flag.png" alt="We obtain the root flag.">
 
-<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/28_htb_vaccine_solved.png" alt="Hack The Box "Vaccine" machine solved">
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/28_htb_vaccine_solved.png" alt="Hack The Box Vaccine machine solved">
 
 <hr />
 
