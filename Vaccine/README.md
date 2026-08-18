@@ -154,6 +154,8 @@ We use Nmap to identify open ports and detect the running services and their ver
 </p>
 
 <pre>nmap -sCV -q 10.129.x.x</pre>
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/1_scanning_with_nmap.png" alt="Scanning with Nmap">
+
 
 <p>
 The scan revealed three main services:
