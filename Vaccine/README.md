@@ -251,12 +251,18 @@ information from a ZIP archive and converts it into a format that John can use f
 <pre>zip2john backup.zip &gt; hash.txt</pre>
 <img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/4_generating_the_hash.png" alt="Generating the hash">
 
+Then we check the hash was correctly created.
+
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/5_checking_if_hash_was_created.png" alt="Then we find and download the file to our local system">
 
 <p>
 We then use the <code>rockyou.txt</code> wordlist:
 </p>
 
 <pre>john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt</pre>
+
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/6_launching_john_with_rockyou.png" alt="Launching John with the rockyou dictionary">
+
 
 <p>
 The recovered password was:
@@ -269,6 +275,9 @@ We can verify the password by extracting the ZIP:
 </p>
 
 <pre>unzip backup.zip</pre>
+
+<img src="https://github.com/3stefani/HTB-writeups/blob/main/Vaccine/img/7_unzip_the_file.png" alt="Unziping the file">
+
 
 <p>
 The archive contained:
