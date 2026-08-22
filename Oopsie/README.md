@@ -1,8 +1,5 @@
 <h1>⭐ Oopsie – Hack The Box Write-up ⭐</h1>
-![HTB](https://img.shields.io/badge/HTB-Oopsie-success)
-![Difficulty](https://img.shields.io/badge/Difficulty-Very%20Easy-brightgreen)
-![OS](https://img.shields.io/badge/OS-Linux-blue)
-![Category](https://img.shields.io/badge/Category-Web%20Enumeration%20%7C%20Broken%20Access%20Control%20%7C%20Privilege%20Escalation-red)
+<p><img src="https://img.shields.io/badge/HTB-Oopsie-success" alt="HTB" /> <img src="https://img.shields.io/badge/Difficulty-Very%20Easy-brightgreen" alt="Difficulty" /> <img src="https://img.shields.io/badge/OS-Linux-blue" alt="OS" /> <img src="https://img.shields.io/badge/Category-Web%20Enumeration%20%7C%20Broken%20Access%20Control%20%7C%20Privilege%20Escalation-red" alt="Category" /></p>
 
 <hr />
 
