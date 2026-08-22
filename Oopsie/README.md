@@ -152,14 +152,14 @@ Port 80 indicates that the machine is running an HTTP web server, so we continue
 <h2>Web Enumeration</h2>
 We access the application using the machine's IP address:
 <pre>http://10.129.x.x</pre>
-<img class="size-full wp-image-3032" src="https://diariohacking.com/wp-content/uploads/2026/08/2_accedemos_al_servicio_web.png" alt="Accessing the web application" width="766" height="424" /> Accessing the web application[/caption]
+<img class="size-full wp-image-3032" src="https://diariohacking.com/wp-content/uploads/2026/08/2_accedemos_al_servicio_web.png" alt="Accessing the web application" width="766" height="424" /> Accessing the web application
 
 The main page displayed information about the company's services, including a message
 indicating that a login was required to access certain functionality.
 
 However, we didn't initially find a login panel by browsing manually through the page.
 
-<img class="size-full wp-image-3033" src="https://diariohacking.com/wp-content/uploads/2026/08/3_debemos_logearnos.png" alt="Indication that we need to log in to access certain services" width="787" height="327" /> Indication that we need to log in to access certain services[/caption]
+<img class="size-full wp-image-3033" src="https://diariohacking.com/wp-content/uploads/2026/08/3_debemos_logearnos.png" alt="Indication that we need to log in to access certain services" width="787" height="327" /> Indication that we need to log in to access certain services
 
 The HTB hint tells us we need to do <strong>Spidering</strong> using <strong>Burp Suite</strong>.
 
@@ -184,7 +184,7 @@ We configure Firefox to use Burp's local proxy:
 <pre>Manual Proxy</pre>
 <pre>HTTP Proxy: 127.0.0.1
 Port: 8080</pre>
-<img class="size-full wp-image-3035" src="https://diariohacking.com/wp-content/uploads/2026/08/4_configuracion_mozilla.png" alt="Firefox configuration to intercept requests with Burp Suite" width="736" height="625" /> Firefox configuration to intercept requests with Burp Suite[/caption]
+<img class="size-full wp-image-3035" src="https://diariohacking.com/wp-content/uploads/2026/08/4_configuracion_mozilla.png" alt="Firefox configuration to intercept requests with Burp Suite" width="736" height="625" /> Firefox configuration to intercept requests with Burp Suite
 <pre></pre>
 Next, we browse the application while Burp records the requests made.
 
@@ -196,13 +196,13 @@ page.
 <h2>Discovering the Login Page</h2>
 Through enumeration of the site we discover the directory:
 <pre>/cdn-cgi/login</pre>
-<img class="size-full wp-image-3037" src="https://diariohacking.com/wp-content/uploads/2026/08/5_descubrimiento_url_login_con_burp.png" alt="Browsing the site with Burp intercepting, we discover the login URL" width="776" height="364" /> Browsing the site with Burp intercepting, we discover the login URL[/caption]
+<img class="size-full wp-image-3037" src="https://diariohacking.com/wp-content/uploads/2026/08/5_descubrimiento_url_login_con_burp.png" alt="Browsing the site with Burp intercepting, we discover the login URL" width="776" height="364" /> Browsing the site with Burp intercepting, we discover the login URL
 
 Accessing:
 <pre>http://10.129.x.x/cdn-cgi/login</pre>
 we get the authentication page.
 
-<img class="size-full wp-image-3038" src="https://diariohacking.com/wp-content/uploads/2026/08/6_accedemos_al_panel_login.png" alt="We reach the login panel" width="525" height="600" /> We reach the login panel[/caption]
+<img class="size-full wp-image-3038" src="https://diariohacking.com/wp-content/uploads/2026/08/6_accedemos_al_panel_login.png" alt="We reach the login panel" width="525" height="600" /> We reach the login panel
 
 This is the answer to the question:
 <pre>What is the path to the directory on the webserver that returns a login page?</pre>
@@ -214,7 +214,7 @@ Answer:
 <h2>Access as Guest</h2>
 After trying to log in with credentials like admin/admin, I decide to access the application as the guest user, but we see that for the Uploads page we'll need to escalate privileges as admin.
 
-<img class="size-full wp-image-3039" src="https://diariohacking.com/wp-content/uploads/2026/08/7_necesitamos_privilegios_admin_acceder_upload.png" alt="For the uploads page we need administrator privileges" width="779" height="333" /> For the uploads page we need administrator privileges[/caption]
+<img class="size-full wp-image-3039" src="https://diariohacking.com/wp-content/uploads/2026/08/7_necesitamos_privilegios_admin_acceder_upload.png" alt="For the uploads page we need administrator privileges" width="779" height="333" /> For the uploads page we need administrator privileges
 
 While browsing with Burp, I start analyzing the requests and cookies used by the application.
 
@@ -227,7 +227,7 @@ This kind of implementation can be dangerous if the server directly trusts value
 <h2>Broken Access Control</h2>
 Using Firefox's dev tools (F12) we see the cookies and discover that certain values could be modified from the browser.
 
-<img class="size-full wp-image-3040" src="https://diariohacking.com/wp-content/uploads/2026/08/8_cookies_de_sesion_dev_tools.png" alt="Session cookies stored - dev tools" width="785" height="243" /> Session cookies stored - dev tools[/caption]
+<img class="size-full wp-image-3040" src="https://diariohacking.com/wp-content/uploads/2026/08/8_cookies_de_sesion_dev_tools.png" alt="Session cookies stored - dev tools" width="785" height="243" /> Session cookies stored - dev tools
 
 The Hack The Box question was:
 <pre>What can be modified in Firefox to get access to the upload page?</pre>
@@ -246,11 +246,11 @@ We continue browsing the web application and access the <code>Account</code> sec
 a numeric identifier to determine which user is being queried. We confirm we are the <code>guest</code> user, whose profile appears
 associated with the parameter <code>id=2</code>.
 
-<img class="size-full wp-image-3042" src="https://diariohacking.com/wp-content/uploads/2026/08/9_parametro_id_url.png" alt="The ID parameter in the URL" width="775" height="351" /> The ID parameter in the URL[/caption]
+<img class="size-full wp-image-3042" src="https://diariohacking.com/wp-content/uploads/2026/08/9_parametro_id_url.png" alt="The ID parameter in the URL" width="775" height="351" /> The ID parameter in the URL
 
 This suggests that user profiles might be identified using consecutive numeric values. As a test, we manually modify the <code>id</code> parameter, changing its value from <code>2</code> to <code>1</code>, to check whether it corresponds to a different user.
 
-<img class="size-full wp-image-3043" src="https://diariohacking.com/wp-content/uploads/2026/08/10_cambiamos_valor_parametro_id.png" alt="We change the value of the ID parameter in the URL" width="774" height="357" /> We change the value of the ID parameter in the URL[/caption]
+<img class="size-full wp-image-3043" src="https://diariohacking.com/wp-content/uploads/2026/08/10_cambiamos_valor_parametro_id.png" alt="We change the value of the ID parameter in the URL" width="774" height="357" /> We change the value of the ID parameter in the URL
 
 By modifying the identifier we managed to access information belonging to the admin user.
 
@@ -276,14 +276,14 @@ We open the browser's Developer Tools (<code>DevTools</code>) and modify the coo
 <pre>34322</pre>
 We also modify the value corresponding to the user role, changing it to:
 <pre>admin</pre>
-<img class="size-full wp-image-3046" src="https://diariohacking.com/wp-content/uploads/2026/08/11_modificamos_valor_cookie.png" alt="From dev tools we modify the cookie value" width="661" height="91" /> From dev tools we modify the cookie value[/caption]
+<img class="size-full wp-image-3046" src="https://diariohacking.com/wp-content/uploads/2026/08/11_modificamos_valor_cookie.png" alt="From dev tools we modify the cookie value" width="661" height="91" /> From dev tools we modify the cookie value
 
 This demonstrates that the application trusts values controlled directly by the client to determine the user's privileges, without performing proper server-side validation.
 
 After modifying these values, we managed to access the <code>Upload</code> section, functionality that was originally restricted to users with
 administrator privileges.
 
-<img class="size-full wp-image-3047" src="https://diariohacking.com/wp-content/uploads/2026/08/12_conseguimos_acceso_a_uploads.png" alt="After modifying the cookie value we gain access to Upload" width="780" height="469" /> After modifying the cookie value we gain access to Upload[/caption]
+<img class="size-full wp-image-3047" src="https://diariohacking.com/wp-content/uploads/2026/08/12_conseguimos_acceso_a_uploads.png" alt="After modifying the cookie value we gain access to Upload" width="780" height="469" /> After modifying the cookie value we gain access to Upload
 
 This is especially interesting because a poorly protected file upload feature can allow uploading executable files.
 
@@ -294,13 +294,13 @@ In this case, we take advantage of this functionality to upload a PHP file conta
 <h2>Creating the Reverse Shell</h2>
 We create a PHP file:
 <pre>nano revshell.php</pre>
-<img class="size-full wp-image-3051" src="https://diariohacking.com/wp-content/uploads/2026/08/14_creamos_reverse_shell.png" alt="We create the PHP file with the reverse shell" width="701" height="113" /> We create the PHP file with the reverse shell[/caption]
+<img class="size-full wp-image-3051" src="https://diariohacking.com/wp-content/uploads/2026/08/14_creamos_reverse_shell.png" alt="We create the PHP file with the reverse shell" width="701" height="113" /> We create the PHP file with the reverse shell
 
 The file contains a reverse shell configured with our Kali VPN IP address and the port we would be listening on.
 
 On our Kali machine we start a listener:
 <pre>nc -lvnp 4444</pre>
-<img class="size-full wp-image-3050" src="https://diariohacking.com/wp-content/uploads/2026/08/13_iniciamos_listener.png" alt="We start the listener on port 4444" width="245" height="72" /> We start the listener on port 4444[/caption]
+<img class="size-full wp-image-3050" src="https://diariohacking.com/wp-content/uploads/2026/08/13_iniciamos_listener.png" alt="We start the listener on port 4444" width="245" height="72" /> We start the listener on port 4444
 
 The communication can be represented as follows:
 <pre>Oopsie
@@ -336,13 +336,13 @@ Answer:
 <h2>Getting the Reverse Shell</h2>
 With the listener ready on Kali, we access the PHP file previously uploaded to the server:
 <pre>http://10.129.x.x/uploads/revshell.php</pre>
-<img class="size-full wp-image-3052" src="https://diariohacking.com/wp-content/uploads/2026/08/15_visitamos_la_ruta_donde_se_sube_archivo.png" alt="We visit the page where our file was uploaded to" width="661" height="183" /> We visit the page where our file was uploaded to[/caption]
+<img class="size-full wp-image-3052" src="https://diariohacking.com/wp-content/uploads/2026/08/15_visitamos_la_ruta_donde_se_sube_archivo.png" alt="We visit the page where our file was uploaded to" width="661" height="183" /> We visit the page where our file was uploaded to
 
 When we visit this URL, the server interprets and executes the PHP file. As a result, the victim machine establishes a connection back to our Kali machine, where we have the listener ready.
 
 We go back to the terminal where we have the listener and confirm we received the connection:
 
-<img class="size-full wp-image-3053" src="https://diariohacking.com/wp-content/uploads/2026/08/16_comprobamos_listener_ha_funciona.png" alt="We check the listener on Kali and see that it worked" width="598" height="147" /> We check the listener on Kali and see that it worked[/caption]
+<img class="size-full wp-image-3053" src="https://diariohacking.com/wp-content/uploads/2026/08/16_comprobamos_listener_ha_funciona.png" alt="We check the listener on Kali and see that it worked" width="598" height="147" /> We check the listener on Kali and see that it worked
 
 This gives us an initial shell on the victim machine. However, reverse shells obtained this way are usually limited and don't have a fully interactive terminal.
 
