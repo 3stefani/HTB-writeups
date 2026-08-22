@@ -121,7 +121,7 @@ We start by checking that the target machine is reachable:
 <h3>Port Scanning</h3>
 We use Nmap to identify open ports, available services, and their versions:
 <pre>nmap -sCV -q 10.129.x.x</pre>
-<img class="size-full wp-image-3031" src="https://diariohacking.com/wp-content/uploads/2026/08/1_port_scanning_with_nmap.png" alt="Port scanning with nmap" width="772" height="316" /> Port scanning with nmap[/caption]
+<img class="size-full wp-image-3031" src="https://diariohacking.com/wp-content/uploads/2026/08/1_port_scanning_with_nmap.png" alt="Port scanning with nmap" width="772" height="316" /> Port scanning with nmap
 
 The scan showed two main services:
 <table style="border-collapse: collapse; width: auto; display: inline-table;">
